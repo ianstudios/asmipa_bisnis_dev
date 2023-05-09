@@ -30,6 +30,8 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         signingConfig signingConfigs.release
+
+        useLibrary 'org.apache.http.legacy'
     }
 
     buildTypes {
@@ -65,4 +67,7 @@ dependencies {
     implementation 'com.google.android.gms:play-services-auth:20.5.0'
 
     implementation 'com.google.code.gson:gson:2.8.9'
+
+    //Volley
+    implementation 'dev.dworks.libs:volleyplus:0.1.4'
 }

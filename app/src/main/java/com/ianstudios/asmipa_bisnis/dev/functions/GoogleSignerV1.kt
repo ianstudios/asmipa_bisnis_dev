@@ -13,13 +13,14 @@ import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlin.coroutines.resumeWithException
 
 
-class GoogleSigner(private var context: Activity) {
+class GoogleSignerV1(private var context: Activity) {
 
     @ExperimentalCoroutinesApi
-    suspend fun signIn() : PendingIntent = suspendCancellableCoroutine { step ->
+    suspend fun signInV1() : PendingIntent = suspendCancellableCoroutine { step ->
         val request = GetSignInIntentRequest.builder()
             .setServerClientId(Strings.GOOGLE_CLIENT_ID)
             .build()
+
 
         Identity.getSignInClient(context)
             .getSignInIntent(request)
@@ -37,10 +38,11 @@ class GoogleSigner(private var context: Activity) {
 
     }
 
-    fun accountProfile(result: Intent, iGoogleSign: IGoogleSign){
+    fun accountProfileV1(result: Intent, iGoogleSign: IGoogleSign){
         val credential =
             Identity.getSignInClient(context).getSignInCredentialFromIntent(result)
-        val profile = GoogleSignIn.getLastSignedInAccount(context)
+       val profile = GoogleSignIn.getLastSignedInAccount(context)
+    //    val accprofile = GoogleSignInAccount.fromAccount(account)
         iGoogleSign.onData(credential, profile)
     }
 }
